@@ -5,6 +5,7 @@ console.log(galleryItems);
 
 const galleryListRef = document.querySelector('.gallery');
 galleryListRef.addEventListener('click', onLargeImageClick);
+// window.addEventListener('keydown', onCloseLargeImg);
 
 createListImage();
 
@@ -40,4 +41,15 @@ function onLargeImageClick(event) {
 `);
 
   instance.show();
+
+  window.addEventListener('keydown', onCloseLargeImg);
+
+  function onCloseLargeImg(event) {
+    if (event.code !== 'Escape') {
+      return;
+    }
+
+    instance.close();
+    window.removeEventListener('keydown', onCloseLargeImg);
+  }
 }

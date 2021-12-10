@@ -26,7 +26,7 @@ function createListImage() {
 new SimpleLightbox('.gallery a', {
   captionsData: `alt`,
   captionPosition: 'bottom',
-  captionDelay: 100,
+  captionDelay: 250,
   enableKeyboard: true,
   doubleTapZoom: 5,
 });

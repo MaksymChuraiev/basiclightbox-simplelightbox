@@ -5,7 +5,6 @@ console.log(galleryItems);
 
 const galleryListRef = document.querySelector('.gallery');
 galleryListRef.addEventListener('click', onLargeImageClick);
-// window.addEventListener('keydown', onCloseLargeImg);
 
 createListImage();
 
@@ -36,12 +35,17 @@ function onLargeImageClick(event) {
     return;
   }
 
-  const instance = basicLightbox.create(`
-    <img src="${event.target.dataset.source}" width="800" height="600">
-`);
+  const instance = basicLightbox.create(
+    `
+    <img src="${event.target.dataset.source}" width="800" height="600">`,
+    {
+      onClose: () => {
+        window.removeEventListener('keydown', onCloseLargeImg);
+      },
+    }
+  );
 
   instance.show();
-
   window.addEventListener('keydown', onCloseLargeImg);
 
   function onCloseLargeImg(event) {
@@ -49,7 +53,8 @@ function onLargeImageClick(event) {
       return;
     }
 
-    instance.close();
-    window.removeEventListener('keydown', onCloseLargeImg);
+    instance.close(() => {
+      window.removeEventListener('keydown', onCloseLargeImg);
+    });
   }
 }

@@ -53,8 +53,6 @@ function onLargeImageClick(event) {
       return;
     }
 
-    instance.close(() => {
-      window.removeEventListener('keydown', onCloseLargeImg);
-    });
+    instance.close();
   }
 }
